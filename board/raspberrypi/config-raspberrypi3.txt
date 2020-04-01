@@ -1,0 +1,11 @@
+kernel=zImage
+
+hdmi_force_hotplug=1
+gpu_mem=128
+disable_overscan=1
+
+enable_uart=1
+uart_2ndstage=1
+
+dtparam=watchdog=on
+dtparam=act_led_trigger=heartbeat

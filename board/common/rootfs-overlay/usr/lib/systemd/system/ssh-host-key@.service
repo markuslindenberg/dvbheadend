@@ -1,0 +1,10 @@
+[Unit]
+Description=SSH %I host key
+ConditionPathExists=!/etc/ssh/ssh_host_%I_key
+After=rngd.service
+
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/bin/sh -c "[ -e /boot/ssh_host_%I_key ] || ssh-keygen -t %I -f /boot/ssh_host_%I_key"
+ExecStart=/usr/bin/cp -pf /boot/ssh_host_%I_key /boot/ssh_host_%I_key.pub /etc/ssh/
+

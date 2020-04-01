@@ -1,0 +1,28 @@
+[Unit]
+Description=Exporter for machine metrics
+Documentation=https://github.com/prometheus/node_exporter
+
+[Service]
+Restart=always
+User=prometheus
+DynamicUser=yes
+ExecStart=/usr/bin/node_exporter \
+	--no-collector.bcache \
+	--no-collector.bonding \
+	--no-collector.conntrack \
+	--no-collector.edac \
+	--no-collector.infiniband \
+	--collector.interrupts \
+	--no-collector.ipvs \
+	--no-collector.mdadm \
+	--no-collector.nfs \
+	--no-collector.nfsd \
+	--no-collector.textfile \
+	--no-collector.xfs \
+	--no-collector.zfs
+	
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+

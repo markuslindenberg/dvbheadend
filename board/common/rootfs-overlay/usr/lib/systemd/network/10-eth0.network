@@ -1,0 +1,12 @@
+[Match]
+Name=eth0
+
+[Network]
+EmitLLDP=yes
+LinkLocalAddressing=yes
+DHCP=yes
+
+[DHCP]
+ClientIdentifier=mac
+UseTimezone=yes
+

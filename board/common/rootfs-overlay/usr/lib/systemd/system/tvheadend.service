@@ -1,0 +1,19 @@
+[Unit]
+Description=Tvheadend
+Wants=network-online.target home-tvheadend.mount
+After=network-online.target home-tvheadend.mount
+
+[Service]
+;User=tvheadend
+;DynamicUser=yes
+;SupplementaryGroups=video
+;ReadWritePaths=/home/tvheadend
+ExecStart=/usr/bin/tvheadend --user tvheadend --group video --firstrun --dbus --satip_rtsp 0 --ipv6 --http_port 80
+;BusName=org.tvheadend.server
+Restart=always
+RestartSec=2
+IOSchedulingClass=realtime
+CPUSchedulingPolicy=rr
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=SSH server
+Wants=ssh-host-key@rsa.service ssh-host-key@ecdsa.service ssh-host-key@ed25519.service ssh-authorized-keys.service
+After=ssh-host-key@rsa.service ssh-host-key@ecdsa.service ssh-host-key@ed25519.service ssh-authorized-keys.service
+
+[Service]
+ExecStart=/usr/sbin/sshd -i -e -o PasswordAuthentication=no
+SuccessExitStatus=255
+StandardInput=socket
+StandardOutput=socket
+StandardError=journal

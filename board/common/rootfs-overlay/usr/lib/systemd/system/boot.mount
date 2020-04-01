@@ -1,0 +1,5 @@
+[Mount]
+What=/dev/mmcblk0p1
+Where=/boot
+Type=vfat
+Options=rw,noatime,fmask=0177,dmask=0077,flush,discard

@@ -1,0 +1,8 @@
+[Unit]
+Description=SSH authorized keys
+ConditionPathExists=!/root/.ssh/authorized_keys
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/mkdir -p -m 0700 /root/.ssh
+ExecStart=-/bin/cp -pf /boot/authorized_keys /root/.ssh/authorized_keys

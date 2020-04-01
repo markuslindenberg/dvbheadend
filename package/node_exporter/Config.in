@@ -1,0 +1,8 @@
+config BR2_PACKAGE_NODE_EXPORTER
+	bool "node_exporter"
+	depends on BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
+	help
+	  Exporter for machine metrics
+
+	  https://github.com/prometheus/node_exporter/
+
