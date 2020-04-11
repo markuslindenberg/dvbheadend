@@ -4,14 +4,22 @@ Wants=network-online.target home-tvheadend.mount
 After=network-online.target home-tvheadend.mount
 
 [Service]
-;User=tvheadend
-;DynamicUser=yes
-;SupplementaryGroups=video
-;ReadWritePaths=/home/tvheadend
-ExecStart=/usr/bin/tvheadend --user tvheadend --group video --firstrun --dbus --satip_rtsp 0 --ipv6 --http_port 80
-;BusName=org.tvheadend.server
+User=tvheadend
+
+RemoveIPC=yes
+PrivateTmp=yes
+NoNewPrivileges=yes
+RestrictSUIDSGID=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/tvheadend
+
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/tvheadend --firstrun --satip_rtsp 0 --ipv6 --http_port 80
+
 Restart=always
 RestartSec=2
+
 IOSchedulingClass=realtime
 CPUSchedulingPolicy=rr
 
