@@ -1,8 +1,13 @@
+[Unit]
+DefaultDependencies=no
+Before=umount.target
+Conflicts=umount.target
+After=local-fs-pre.target
+After=resize-storage.service
+Wants=resize-storage.service
+
 [Mount]
 What=/dev/mmcblk0p2
 Where=/home/tvheadend
 Type=f2fs
 Options=noatime
-
-[Install]
-WantedBy=local-fs.target
