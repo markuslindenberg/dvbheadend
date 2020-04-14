@@ -1,4 +1,4 @@
-name: build firmware images
+name: image
 
 on:
   push:
@@ -9,28 +9,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout dvbheadend
+        uses: actions/checkout@v2
         with:
           path: 'dvbheadend'
-      - uses: actions/checkout@v2
+      - name: Checkout buildroot
+        uses: actions/checkout@v2
         with:
           repository: 'buildroot/buildroot'
           ref: '2020.02.1'
           path: 'buildroot'
 
-      - name: configure buildroot
-        run: make BR2_EXTERNAL=$GITHUB_WORKSPACE/dvbheadend dvbheadend_raspberrypi3_defconfig
+      - name: make dvbheadend_raspberrypi3_defconfig
+        run: make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/dvbheadend dvbheadend_raspberrypi3_defconfig
         working-directory: ./buildroot
-      - name: build image
-        run: make all
+      - name: make source
+        run: make -s source
+        working-directory: ./buildroot
+      - name: make toolchain
+        run: make -s toolchain
+        working-directory: ./buildroot
+      - name: make all
+        run: make -s all
         working-directory: ./buildroot
 
-      - uses: actions/upload-artifact@v1
+      - name: Upload images
+        uses: actions/upload-artifact@v1
         with:
           name: sdcard.img
           path: buildroot/output/images/sdcard.img
-
-      - uses: actions/upload-artifact@v1
-        with:
-          name: zImage
-          path: buildroot/output/images/zImage
