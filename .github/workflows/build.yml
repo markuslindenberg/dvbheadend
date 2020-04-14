@@ -33,7 +33,7 @@ jobs:
         run: make -s all
         working-directory: ./buildroot
 
-      - name: Upload images
+      - name: Upload sdcard.img
         uses: actions/upload-artifact@v1
         with:
           name: sdcard.img
