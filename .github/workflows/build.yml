@@ -1,0 +1,36 @@
+name: build firmware images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: 'dvbheadend'
+      - uses: actions/checkout@v2
+        with:
+          repository: 'buildroot/buildroot'
+          ref: '2020.02.1'
+          path: 'buildroot'
+
+      - name: configure buildroot
+        run: make BR2_EXTERNAL=$GITHUB_WORKSPACE/dvbheadend dvbheadend_raspberrypi3_defconfig
+        working-directory: ./buildroot
+      - name: build image
+        run: make all
+        working-directory: ./buildroot
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: sdcard.img
+          path: buildroot/output/images/sdcard.img
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: zImage
+          path: buildroot/output/images/zImage
