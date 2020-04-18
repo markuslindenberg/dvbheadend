@@ -20,6 +20,8 @@ Releases are not yet available on the [releases](https://github.com/markuslinden
 
 Currently, SD card images are built automatically and can be downloaded from the latest [successful Github Actions run](https://github.com/markuslindenberg/dvbheadend/actions?query=is%3Asuccess+workflow%3Aimage).
 
+> The 64 bit images are pretty much untested, `dvbheadend-raspberrypi3.img` is known as working. 
+
 ## Setup
 
 * Write `sdcard.img` on an empty SD card.
@@ -40,7 +42,7 @@ Instead of re-flashing the SD card you can just replace the `Image` file on the 
 
 DHCP / auto configuration and link local addressing are enabled. Additionally to IPv6, the device fully supports legacy IP. NTP server can be set using DHCP, otherwise pool.ntp.org will be used.
 
-### Accessible Ports
+### Accessible ports
 
 | Port | Process        |
 | ---- | -------------- |
@@ -57,17 +59,15 @@ LLMNR and DNS-SD/Bonjour will announce <http://dvbheadend.local/>.
 
 [node_exporter](https://github.com/prometheus/node_exporter) for [Prometheus](https://prometheus.io/) is running on <http://dvbheadend.local:9100/metrics>.
 
-# Access
+## Access
 
-The firmware is running a buildroot Linux rootfs built using [systemd](https://www.freedesktop.org/wiki/Software/systemd/) and [busybox](https://busybox.net/). All changes except on the `/boot` and `/home/tvheadend` mountpoints are lost on reboot.
+### Console
 
-## Console
+Use a serial console at 115200 or keyboard & monitor to access the console. Password for root is empty.
 
-Use a serial console or keyboard & monitor to access the console. Password for root is empty.
+### SSH
 
-## SSH
-
-Keys only. Put an `authorized_keys` file on the FAT parition, reboot.
+Keys only. Put an `authorized_keys` file on the FAT partition, reboot.
 
 ```bash
 ssh root@dvbheadend.local
