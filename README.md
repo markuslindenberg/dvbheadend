@@ -1,60 +1,78 @@
-# dvbheadend Raspberry Pi 3 firmware for USB DVB tuners and tvheadend
+![image](https://github.com/markuslindenberg/dvbheadend/workflows/image/badge.svg)
+
+# Introduction
 
 This is a [Raspberry Pi](https://www.raspberrypi.org/products/) firmware image for running [Tvheadend](https://tvheadend.org/) on a local network in the most reliable way possible.
 
-## Using
-
-* Create SD card using `sdcard.img`.
-* Plug in SD card DVB USB tuner(s) and wired ethernet.
-* Browse to <http://dvbheadend.local/> to configure tvheadend.
-
-Tvheadend uses HTTP port 80 and HTSP port 9982. It works perfectly with Kodi / [LibreELEC](https://libreelec.tv/) mediacentre on a Raspberry Pi 3 with [MPEG-2 license key](https://codecs.raspberrypi.org/mpeg-2-license-key/).
+# Installation
 
 ## Supported hardware
 
-* [Raspberry Pi 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/)
+* [Raspberry Pi](https://www.raspberrypi.org/products/) 3 and 4.
 * [Linux supported DVB USB device(s)](https://www.linuxtv.org/wiki/index.php/Hardware_device_information)
 * Minimum 1GB SD card. Remaining space on the SD card is used for tvheadend configuration and recordings.
 
 Adding support for other models/boards [supported by buildroot](https://github.com/buildroot/buildroot/tree/master/board) is possible.
 
-## Building
+## Download
 
-```bash
-cd ..
-git clone git://git.buildroot.net/buildroot
-make O=$PWD/dvbheadend_build BR2_EXTERNAL=../dvbheadend -C buildroot dvbheadend_raspberrypi3_defconfig
-make
-```
+Releases are not yet available on the [releases](https://github.com/markuslindenberg/dvbheadend/releases) page.
 
-## Installing
+Currently, SD card images are built automatically and can be downloaded from the latest [successful Github Actions run](https://github.com/markuslindenberg/dvbheadend/actions?query=is%3Asuccess+workflow%3Aimage).
 
-Create SD card from image in `output/images/sdcard.img`.
+## Setup
+
+* Write `sdcard.img` on an empty SD card.
+* Plug in SD card DVB USB tuner(s) and wired ethernet.
+* Browse to <http://dvbheadend.local/> to configure tvheadend.
+
+Tvheadend uses HTTP port 80 and HTSP port 9982. It works perfectly with Kodi / [LibreELEC](https://libreelec.tv/) mediacentre on a Raspberry Pi 3 with [MPEG-2 license key](https://codecs.raspberrypi.org/mpeg-2-license-key/).
+
+# Operation
+
+The firmware is running a Linux initramfs in RAM as root filesystem. All changes except on the `/boot` and `/home/tvheadend` partitions are lost on reboot.
 
 ## Updating
 
-Use `output/images/Image` to replace the `Image` file on the SD card (or scp to `/boot/`) and reboot.
+Instead of re-flashing the SD card you can just replace the `Image` file on the SD card (or scp to `/boot/`) and reboot.
 
 ## Network
 
-Network is auto configured, DNS-SD/Bonjour autodiscovery is supported. Additionally to IPv6, the device fully supports legacy IP. NTP server and time zone can be set using DHCP.
+DHCP / auto configuration and link local addressing are enabled. Additionally to IPv6, the device fully supports legacy IP. NTP server can be set using DHCP, otherwise pool.ntp.org will be used.
 
-### Monitoring
+### Accessible Ports
+
+| Port | Process        |
+| ---- | -------------- |
+| 22   | SSH            |
+| 80   | tvheadend HTTP |
+| 9982 | tvheadend HTSP |
+| 9100 | node_exporter  |
+
+### Discovery
+
+LLMNR and DNS-SD/Bonjour will announce <http://dvbheadend.local/>.
+
+## Monitoring
 
 [node_exporter](https://github.com/prometheus/node_exporter) for [Prometheus](https://prometheus.io/) is running on <http://dvbheadend.local:9100/metrics>.
 
-## Access
+# Access
 
 The firmware is running a buildroot Linux rootfs built using [systemd](https://www.freedesktop.org/wiki/Software/systemd/) and [busybox](https://busybox.net/). All changes except on the `/boot` and `/home/tvheadend` mountpoints are lost on reboot.
 
-### Console
+## Console
 
-Password for root is empty.
+Use a serial console or keyboard & monitor to access the console. Password for root is empty.
 
-### SSH
+## SSH
 
 Keys only. Put an `authorized_keys` file on the FAT parition, reboot.
 
 ```bash
 ssh root@dvbheadend.local
 ```
+
+# Development
+
+This repository is a Buildroot br2-external tree, see the [Buildroot manual](https://buildroot.org/downloads/manual/manual.html#outside-br-custom) for build instructions.
