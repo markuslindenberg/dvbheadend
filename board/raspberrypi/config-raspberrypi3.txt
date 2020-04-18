@@ -1,8 +1,10 @@
 kernel=zImage
+boot_delay=0
 
 hdmi_force_hotplug=1
 gpu_mem=128
 disable_overscan=1
+disable_splash=1
 
 enable_uart=1
 uart_2ndstage=1

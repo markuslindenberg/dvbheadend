@@ -11,4 +11,3 @@ enable_uart=1
 uart_2ndstage=1
 
 dtparam=watchdog=on
-dtparam=act_led_trigger=heartbeat
