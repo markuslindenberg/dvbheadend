@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        board: ['raspberrypi3', 'raspberrypi3_64']
+        board: ['raspberrypi3', 'raspberrypi3_64', 'raspberrypi4_64']
       fail-fast: false
     steps:
       - name: Checkout dvbheadend
