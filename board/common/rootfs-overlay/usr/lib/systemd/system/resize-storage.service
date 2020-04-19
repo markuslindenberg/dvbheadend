@@ -4,5 +4,6 @@ ConditionPathExists=/dev/mmcblk0p2
 
 [Service]
 Type=oneshot
+ExecStartPre=/usr/sbin/fsck.f2fs -f /dev/mmcblk0p2
 ExecStartPre=/usr/sbin/parted -s /dev/mmcblk0 -- resizepart 2 -1s
 ExecStart=/usr/sbin/resize.f2fs /dev/mmcblk0p2
