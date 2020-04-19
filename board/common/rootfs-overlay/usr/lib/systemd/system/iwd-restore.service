@@ -1,0 +1,12 @@
+[Unit]
+Description=copy /boot/*.psk to /var/lib/iwd
+Before=iwd.service
+
+[Service]
+Type=oneshot
+StateDirectory=iwd
+StateDirectoryMode=0700
+ExecStart=/usr/bin/find /boot/ -maxdepth 1 -name '*.psk' -type f -exec /usr/bin/cp -p -f {} /var/lib/iwd/ +
+
+[Install]
+WantedBy=iwd.service
