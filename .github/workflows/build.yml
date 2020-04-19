@@ -18,6 +18,9 @@ jobs:
           - 'raspberrypi4_64'
       fail-fast: false
 
+    env:
+      BUILD_NAME: 'dvbheadend-${{ matrix.board }}-${{ github.sha }}'
+      CONFIG_NAME: 'dvbheadend_${{ matrix.board }}_defconfig'
     steps:
       - name: Checkout Buildroot
         uses: actions/checkout@v2
@@ -26,19 +29,19 @@ jobs:
           ref: '${{ env.BUILDROOT_VERSION }}'
           path: 'buildroot'
 
-      - name: Checkout Dvbheadend
+      - name: Checkout External
         uses: actions/checkout@v2
         with:
-          path: 'dvbheadend'
+          path: 'external'
       - name: Configure Image
-        run: 'make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/dvbheadend dvbheadend_${{ matrix.board }}_defconfig'
+        run: 'make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/external $CONFIG_NAME'
         working-directory: 'buildroot'
 
       - name: Cache Downloads
         uses: actions/cache@v1
         with:
           path: 'buildroot/dl'
-          key: 'sources-${{ env.BUILDROOT_VERSION }}-${{ matrix.board }}'
+          key: 'dl-${{ env.BUILDROOT_VERSION }}-${{ matrix.board }}'
       - name: Download Source
         run: 'make -s source'
         working-directory: 'buildroot'
@@ -51,8 +54,13 @@ jobs:
         run: 'make -s all'
         working-directory: 'buildroot'
 
-      - name: Upload Image
+      - name: Collect Artifacts
+        run: |
+          mkdir -p "artifacts/$BUILD_NAME"
+          mv buildroot/output/images/sdcard.img buildroot/output/images/*Image artifacts/$BUILD_NAME/
+
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: 'dvbheadend-${{ matrix.board }}-${{ github.sha }}.img'
-          path: 'buildroot/output/images/sdcard.img'
+          name: '${{ env.BUILD_NAME }}'
+          path: 'artifacts/${{ env.BUILD_NAME }}'
