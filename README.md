@@ -20,8 +20,6 @@ Releases are not yet available on the [releases](https://github.com/markuslinden
 
 Currently, SD card images are built automatically and can be downloaded from the latest [successful Github Actions run](https://github.com/markuslindenberg/dvbheadend/actions?query=is%3Asuccess+workflow%3Aimage).
 
-> The 64 bit images are pretty much untested, `dvbheadend-raspberrypi3.img` is known as working. 
-
 ## Setup
 
 * Write `sdcard.img` on an empty SD card.
