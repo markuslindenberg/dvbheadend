@@ -37,8 +37,8 @@ jobs:
         run: make -s all
         working-directory: ./buildroot
 
-      - name: Upload dvbheadend-${{ matrix.board }}.img
+      - name: Upload sdcard.img
         uses: actions/upload-artifact@v1
         with:
-          name: dvbheadend-${{ matrix.board }}.img
+          name: dvbheadend-${{ matrix.board }}-${{ github.sha }}.img
           path: buildroot/output/images/sdcard.img
