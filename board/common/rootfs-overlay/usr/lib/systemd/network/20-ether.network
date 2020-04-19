@@ -1,5 +1,5 @@
 [Match]
-Name=eth0
+Type=ether
 
 [Network]
 EmitLLDP=yes
@@ -8,4 +8,4 @@ DHCP=yes
 
 [DHCP]
 ClientIdentifier=mac
-RouteMetric=100
+RouteMetric=200

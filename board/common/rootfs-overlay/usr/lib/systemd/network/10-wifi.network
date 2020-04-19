@@ -1,11 +1,10 @@
 [Match]
-Name=eth0
+Type=wlan
 
 [Network]
-EmitLLDP=yes
 LinkLocalAddressing=yes
 DHCP=yes
 
 [DHCP]
 ClientIdentifier=mac
-RouteMetric=100
+RouteMetric=300
