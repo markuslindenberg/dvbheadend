@@ -18,6 +18,7 @@ ExecStart=/usr/bin/node_exporter \
 	--no-collector.nfs \
 	--no-collector.nfsd \
 	--no-collector.textfile \
+	--collector.wifi \
 	--no-collector.xfs \
 	--no-collector.zfs
 	
