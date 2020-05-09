@@ -57,11 +57,17 @@ jobs:
           make -s all
         working-directory: 'buildroot'
 
-      - name: Collect Artifacts
+      - name: Move Artifacts
         run: |
           mkdir -p "artifacts/$BUILD_NAME"
           mv buildroot/output/images/sdcard.img buildroot/output/images/*Image artifacts/$BUILD_NAME/
 
+      - name: Clean Build Directory
+        run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
+          make -s clean
+        working-directory: 'buildroot'
+  
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
         with:
