@@ -1,7 +1,7 @@
 [Unit]
 Description=Tvheadend
-Wants=network-online.target home-tvheadend.mount
-After=network-online.target home-tvheadend.mount
+Wants=network.target home-tvheadend.mount
+After=network.target home-tvheadend.mount
 
 [Service]
 User=tvheadend
