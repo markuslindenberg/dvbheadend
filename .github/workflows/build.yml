@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  BUILDROOT_VERSION: '2020.02.1'
+  BUILDROOT_VERSION: '2020.05-rc1'
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
           sudo apt-get clean
           sudo rm -rf /usr/share/swift /usr/share/dotnet
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           sudo apt-get update
@@ -43,7 +43,7 @@ jobs:
           ref: '${{ env.BUILDROOT_VERSION }}'
           path: 'buildroot'
 
-      - name: Checkout External
+      - name: Checkout external
         uses: actions/checkout@v2
         with:
           path: 'external'
@@ -53,36 +53,36 @@ jobs:
           make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/external $CONFIG_NAME
         working-directory: 'buildroot'
 
-      - name: Download Source
+      - name: Download source
         run: |
           echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s source
         working-directory: 'buildroot'
 
-      - name: Build Toolchain
+      - name: Build toolchain
         run: |
           echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s toolchain
         working-directory: 'buildroot'
 
-      - name: Build Image
+      - name: Build image
         run: |
           echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s all
         working-directory: 'buildroot'
 
-      - name: Move Artifacts
+      - name: Move artifacts
         run: |
           mkdir -p "artifacts/$BUILD_NAME"
           mv buildroot/output/images/sdcard.img buildroot/output/images/*Image artifacts/$BUILD_NAME/
 
-      - name: Clean Build Directory
+      - name: Clean build directory
         run: |
           echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s clean
         working-directory: 'buildroot'
   
-      - name: Upload Artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
           name: '${{ env.BUILD_NAME }}'
