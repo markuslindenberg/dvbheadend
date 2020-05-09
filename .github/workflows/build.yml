@@ -34,24 +34,27 @@ jobs:
         with:
           path: 'external'
       - name: Configure Image
-        run: 'make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/external $CONFIG_NAME'
+        run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
+          make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/external $CONFIG_NAME
         working-directory: 'buildroot'
 
-      - name: Cache Downloads
-        uses: actions/cache@v1
-        with:
-          path: 'buildroot/dl'
-          key: 'dl-${{ env.BUILDROOT_VERSION }}-${{ matrix.board }}'
       - name: Download Source
-        run: 'make -s source'
+        run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
+          make -s source
         working-directory: 'buildroot'
 
       - name: Build Toolchain
-        run: 'make -s toolchain'
+        run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
+          make -s toolchain
         working-directory: 'buildroot'
 
       - name: Build Image
-        run: 'make -s all'
+        run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
+          make -s all
         working-directory: 'buildroot'
 
       - name: Collect Artifacts
