@@ -24,10 +24,16 @@ jobs:
     steps:
       - name: Free space on runner
         run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           sudo apt-get -y purge 'clang*' 'libclang*' 'llvm-*' 'lld-*' 'lldb-*' 'dotnet-*' 'msbuild*' 'mono*' 'libmono*' ca-certificates-mono esl-erlang 'gfortran-*' 'libgfortran*' google-cloud-sdk 'ghc-*' 'cabal-*' 'zulu-*' 'mongodb-org*'
           sudo apt-get -y autoremove
           sudo apt-get clean
           sudo rm -rf /usr/share/swift /usr/share/dotnet
+
+      - name: Install Dependencies
+        run: |
+          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
+          sudo apt-get -y install bc
 
       - name: Checkout Buildroot
         uses: actions/checkout@v2
