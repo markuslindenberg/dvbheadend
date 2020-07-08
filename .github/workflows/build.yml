@@ -25,9 +25,8 @@ jobs:
     steps:
       - name: Free space on runner
         run: |
-          sudo apt-get -y remove 'clang*' 'libclang*' 'llvm-*' 'lld-*' 'lldb-*' 'dotnet-*' 'msbuild*' 'mono*' 'libmono*' ca-certificates-mono esl-erlang 'gfortran-*' 'libgfortran*' google-cloud-sdk 'ghc-*' 'cabal-*' 'zulu-*' 'mongodb-org*'
-          sudo apt-get -y autoremove
-          sudo apt-get clean
+          #sudo apt-get -y --autoremove remove 'clang*' 'libclang*' 'llvm-*' 'lld-*' 'lldb-*' 'dotnet-*' 'msbuild*' 'mono*' 'libmono*' ca-certificates-mono esl-erlang 'gfortran-*' 'libgfortran*' google-cloud-sdk 'ghc-*' 'cabal-*' 'zulu-*' 'mongodb-org*'
+          #sudo apt-get clean
           sudo rm -rf /usr/share/swift /usr/share/dotnet
 
       - name: Install dependencies
