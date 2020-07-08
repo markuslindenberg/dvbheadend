@@ -25,7 +25,6 @@ jobs:
     steps:
       - name: Free space on runner
         run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           sudo apt-get -y remove 'clang*' 'libclang*' 'llvm-*' 'lld-*' 'lldb-*' 'dotnet-*' 'msbuild*' 'mono*' 'libmono*' ca-certificates-mono esl-erlang 'gfortran-*' 'libgfortran*' google-cloud-sdk 'ghc-*' 'cabal-*' 'zulu-*' 'mongodb-org*'
           sudo apt-get -y autoremove
           sudo apt-get clean
@@ -33,7 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           sudo apt-get update
           sudo apt-get -y install bc
 
@@ -50,41 +48,21 @@ jobs:
           path: 'external'
       - name: Configure Image
         run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s BR2_EXTERNAL=$GITHUB_WORKSPACE/external $CONFIG_NAME
         working-directory: 'buildroot'
 
       - name: Download source
         run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s source
-        working-directory: 'buildroot'
-
-      - name: Build toolchain
-        run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
-          make -s toolchain
         working-directory: 'buildroot'
 
       - name: Build image
         run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
           make -s all
         working-directory: 'buildroot'
 
-      - name: Move artifacts
-        run: |
-          mkdir -p "artifacts/$BUILD_NAME"
-          mv buildroot/output/images/sdcard.img buildroot/output/images/*Image artifacts/$BUILD_NAME/
-
-      - name: Clean build directory
-        run: |
-          echo "::stop-commands::ACbGa0XUVqRf9pHUWRbL"
-          make -s clean
-        working-directory: 'buildroot'
-  
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
           name: '${{ env.BUILD_NAME }}'
-          path: 'artifacts/${{ env.BUILD_NAME }}'
+          path: 'buildroot/output/images/sdcard.img'
