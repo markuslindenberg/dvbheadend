@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  BUILDROOT_VERSION: '2020.05-rc1'
+  BUILDROOT_VERSION: '2020.05'
 
 jobs:
   build:
@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         board:
+          - 'raspberrypi2'
           - 'raspberrypi3'
           - 'raspberrypi4_64'
       fail-fast: false

@@ -1,5 +1,4 @@
-kernel=Image
-arm_64bit=1
+kernel=zImage
 boot_delay=0
 
 hdmi_force_hotplug=1
