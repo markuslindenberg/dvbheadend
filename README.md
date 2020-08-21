@@ -2,13 +2,13 @@
 
 # Introduction
 
-This is a [Raspberry Pi](https://www.raspberrypi.org/products/) firmware image for running [Tvheadend](https://tvheadend.org/) on a local network in the most reliable way possible.
+This is a [Raspberry Pi 4](https://www.raspberrypi.org/products/) firmware image for running [Tvheadend](https://tvheadend.org/) on a local network in the most reliable way possible.
 
 # Installation
 
 ## Supported hardware
 
-* [Raspberry Pi](https://www.raspberrypi.org/products/) 3 and 4.
+* [Raspberry Pi](https://www.raspberrypi.org/products/) 4.
 * [Linux supported DVB USB device(s)](https://www.linuxtv.org/wiki/index.php/Hardware_device_information)
 * Minimum 1GB SD card. Remaining space on the SD card is used for tvheadend configuration and recordings.
 
