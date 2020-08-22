@@ -1,7 +1,0 @@
-config BR2_PACKAGE_MN88472_FIRMWARE
-	bool "mn88472-firmware"
-	help
-	  Firmware for Panasonic MN88472 DVB-T/DVB-T2/DVB-C demodulator
-
-	  https://www.linuxtv.org/wiki/index.php/Xbox_One_Digital_TV_Tuner
-

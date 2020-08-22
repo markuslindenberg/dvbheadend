@@ -1,2 +1,1 @@
 source "$BR2_EXTERNAL_DVBHEADEND_PATH/package/node_exporter/Config.in"
-source "$BR2_EXTERNAL_DVBHEADEND_PATH/package/mn88472-firmware/Config.in"
