@@ -14,6 +14,6 @@ ID_LIKE=buildroot
 PRETTY_NAME="dvbheadend (Buildroot ${BR2_VERSION})"
 EOF
 
-if [ -n "${GITHUB_SHA}" ]; then
+if [ -n "${GITHUB_SHA:-}" ]; then
     echo "VERSION_ID=${GITHUB_SHA}" >> ${TARGET_DIR}/etc/os-release 
 fi
