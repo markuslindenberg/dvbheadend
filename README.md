@@ -26,7 +26,7 @@ Currently, SD card images are built automatically and can be downloaded from the
 * Plug in SD card DVB USB tuner(s) and wired ethernet.
 * Browse to <http://dvbheadend.local/> to configure tvheadend.
 
-Tvheadend uses HTTP port 80 and HTSP port 9982. It works perfectly with Kodi / [LibreELEC](https://libreelec.tv/) mediacentre on a Raspberry Pi 3 with [MPEG-2 license key](https://codecs.raspberrypi.org/mpeg-2-license-key/).
+Tvheadend uses HTTP port 9981 and HTSP port 9982. It works perfectly with Kodi / [LibreELEC](https://libreelec.tv/) mediacentre on a Raspberry Pi 3 with [MPEG-2 license key](https://codecs.raspberrypi.org/mpeg-2-license-key/).
 
 # Operation
 
@@ -45,7 +45,7 @@ DHCP / auto configuration and link local addressing are enabled. Additionally to
 | Port | Process        |
 | ---- | -------------- |
 | 22   | SSH            |
-| 80   | tvheadend HTTP |
+| 9981 | tvheadend HTTP |
 | 9982 | tvheadend HTSP |
 | 9100 | node_exporter  |
 
