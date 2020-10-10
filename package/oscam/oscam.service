@@ -1,0 +1,20 @@
+[Unit]
+Description=OSCam
+Wants=network.target home-tvheadend.mount
+After=network.target home-tvheadend.mount
+After=rngd.service
+After=time-sync.target
+
+[Service]
+User=tvheadend
+SupplementaryGroups=dialout
+DynamicUser=yes
+ReadWritePaths=/home/tvheadend
+ExecStartPre=/bin/mkdir -p /home/tvheadend/.oscam
+ExecStart=/usr/bin/oscam -c /home/tvheadend/.oscam -r 0
+
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

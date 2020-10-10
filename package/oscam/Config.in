@@ -1,0 +1,8 @@
+config BR2_PACKAGE_OSCAM
+	bool "oscam"
+	select BR2_PACKAGE_OPENSSL
+	help
+	  OSCam is an Open Source Conditional Access Module software,
+	  based on the very good MpCS version 0.9d created by dukat.
+
+	  https://trac.streamboard.tv/oscam/wiki
